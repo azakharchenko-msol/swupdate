@@ -171,6 +171,7 @@ int get_mtd_from_device(char *s) {
 	int ret;
 	int mtdnum;
 	char *real_s;
+	TRACE("[get_mtd_from_device] try resolve device %s", s);
 
 	if (!s)
 		return -1;
@@ -179,13 +180,17 @@ int get_mtd_from_device(char *s) {
 	if (real_s == NULL) {
 		char tmp_s[PATH_MAX] = {0};
 
-		if (! strncmp(s, "/dev/", 5))
+		if (! strncmp(s, "/dev/", 5)){
+			TRACE("[get_mtd_from_device] Error: starts with /dev but can't be resolved with realpath");
 			return -1;
+		}
 
 		snprintf(tmp_s, sizeof(tmp_s), "/dev/%s", s);
 		real_s = realpath(tmp_s, NULL);
-		if (real_s == NULL)
+		if (real_s == NULL){
+			TRACE("[get_mtd_from_device] Error: failed to resolve %s with realpath", tmp_s);
 			return -1;
+		}
 	}
 
 	TRACE("mtd name [%s] resolved to [%s]", s, real_s);
@@ -195,8 +200,11 @@ int get_mtd_from_device(char *s) {
 
 	free (real_s);
 
-	if (ret <= 0)
+	if (ret <= 0){
+		TRACE("failed to get device number for %s", real_s);
+
 		return -1;
+	}
 
 	return mtdnum;
 }
@@ -210,6 +218,8 @@ int get_mtd_from_name(const char *s)
 	for (i = flash->mtd.lowest_mtd_num;
 	     i <= flash->mtd.highest_mtd_num; i++) {
 		info = &flash->mtd_info[i].mtd;
+		TRACE("[get_mtd_from_name] found mtd partition: %s", info->name);
+
 		if (!strcmp(info->name, s))
 			return i;
 	}
