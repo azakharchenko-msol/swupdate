@@ -7,7 +7,7 @@
 
 #pragma once
 
-#define BANNER "SWUpdate v" SWU_VER "\n"
+#define BANNER "SWUpdate custom: v" SWU_VER "\n"
 
 #define SWUPDATE_GENERAL_STRING_SIZE	256
 #define SWUPDATE_UPDATE_DESCRIPTION_STRING_SIZE	512

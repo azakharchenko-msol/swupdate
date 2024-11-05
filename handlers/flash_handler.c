@@ -356,6 +356,7 @@ static int install_flash_image(struct img_type *img,
 	void __attribute__ ((__unused__)) *data)
 {
 	int mtdnum;
+	TRACE("[install_flash_image] begin...");
 
 	if (strlen(img->mtdname)){
 		mtdnum = get_mtd_from_name(img->mtdname);
