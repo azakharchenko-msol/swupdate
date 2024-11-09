@@ -446,6 +446,10 @@ static void sigterm_handler(int __attribute__ ((__unused__)) signum)
 
 int main(int argc, char **argv)
 {
+#ifndef CONFIG_HASH_VERIFY
+	#define CONFIG_HASH_VERIFY
+	printf("WARNING: CONFIG_HASH_VERIFY is not defined! fixing...");
+#endif
 	int c;
 	char fname[MAX_IMAGE_FNAME];
 	char *cfgfname = NULL;
