@@ -42,22 +42,6 @@ static inline IMGTYPE get_entry_type(struct img_type *img)
 	return IS_UNKNOWN;
 }
 
-
-#ifndef CONFIG_HASH_VERIFY
-static int check_hash_absent(struct imglist *list)
-{
-	struct img_type *image;
-	LIST_FOREACH(image, list, next) {
-		if (strnlen((const char *)image->sha256, SHA256_HASH_LENGTH) > 0) {
-			ERROR("hash verification not enabled but hash supplied for %s",
-				  image->fname);
-			return -EINVAL;
-		}
-	}
-	return 0;
-}
-#endif
-
 #ifdef CONFIG_SIGNED_IMAGES
 /*
  * Check that all images in a list have a valid hash

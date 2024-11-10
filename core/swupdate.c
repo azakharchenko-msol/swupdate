@@ -448,9 +448,9 @@ int main(int argc, char **argv)
 {
 #ifndef CONFIG_HASH_VERIFY
 	#define CONFIG_HASH_VERIFY
-	prinft("WARNING: CONFIG_HASH_VERIFY is not defined! fixing...");
+	printf("WARNING: CONFIG_HASH_VERIFY is not defined! fixing...");
 #else
-	prinft("INFO: CONFIG_HASH_VERIFY is defined");
+	printf("INFO: CONFIG_HASH_VERIFY is defined");
 
 #endif
 	int c;
