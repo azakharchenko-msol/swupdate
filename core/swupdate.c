@@ -448,7 +448,10 @@ int main(int argc, char **argv)
 {
 #ifndef CONFIG_HASH_VERIFY
 	#define CONFIG_HASH_VERIFY
-	printf("WARNING: CONFIG_HASH_VERIFY is not defined! fixing...");
+	prinft("WARNING: CONFIG_HASH_VERIFY is not defined! fixing...");
+#else
+	prinft("INFO: CONFIG_HASH_VERIFY is defined");
+
 #endif
 	int c;
 	char fname[MAX_IMAGE_FNAME];
